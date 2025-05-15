@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DM デッキビルダー</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>DM デッキ構築ツール</h1>
+
+  <div class="container">
+    <div class="card-list">
+      <h2>カード一覧</h2>
+
+      <!-- コンパクトな検索フィルター -->
+      <div class="search-filters">
+        <input type="text" id="searchInput" placeholder="カード名で検索" oninput="filterCards()">
+        <select id="typeFilter" onchange="filterCards()">
+          <option value="">すべて</option>
+          <option value="クリーチャー">クリーチャー</option>
+          <option value="呪文">呪文</option>
+          <option value="クロスギア">クロスギア</option>
+          <option value="サイキック・クリーチャー">サイキック・クリーチャー</option>
+          <option value="ドラグハート・ウェポン">ドラグハート・ウェポン</option>
+          <option value="ドラグハート・フォートレス">ドラグハート・フォートレス</option>
+          <option value="D2フィールド">D2フィールド</option>
+          <option value="GRクリーチャー">GRクリーチャー</option>
+        </select>
+        <input type="text" id="raceFilter" placeholder="種族を入力" oninput="filterCards()">
+      </div>
+
+      <div class="power-range">
+        <label>パワー範囲:</label>
+        <input type="number" id="minPower" placeholder="最小" oninput="filterCards()">
+        <span>〜</span>
+        <input type="number" id="maxPower" placeholder="最大" oninput="filterCards()">
+      </div>
+
+      <h3>文明で絞り込み</h3>
+      <div>
+        <input type="checkbox" id="civilizationFire" onchange="filterCards()">
+        <label for="civilizationFire">火</label>
+      </div>
+      <div>
+        <input type="checkbox" id="civilizationWater" onchange="filterCards()">
+        <label for="civilizationWater">水</label>
+      </div>
+      <div>
+        <input type="checkbox" id="civilizationNature" onchange="filterCards()">
+        <label for="civilizationNature">自然</label>
+      </div>
+      <div>
+        <input type="checkbox" id="civilizationDarkness" onchange="filterCards()">
+        <label for="civilizationDarkness">闇</label>
+      </div>
+      <div>
+        <input type="checkbox" id="civilizationLight" onchange="filterCards()">
+        <label for="civilizationLight">光</label>
+      </div>
+      <div>
+        <input type="checkbox" id="singleColorOnly" onchange="filterCards()">
+        <label for="singleColorOnly">選択文明のみの単色カードを検索</label>
+      </div>
+
+      <div id="cardContainer"></div>
+    </div>
+
+    <div class="deck">
+      <h2>デッキ（<span id="deckCount">0</span>枚）</h2>
+      <ul id="deckList"></ul>
+
+      <input type="text" id="deckNameInput" placeholder="デッキ名を入力">
+      <button onclick="saveDeck()">デッキ保存</button>
+      <select id="savedDecks" onchange="loadSelectedDeck()">
+        <option value="">保存されたデッキを選択</option>
+      </select>
+      <button onclick="clearDeck()">デッキをすべて削除</button>
+      <button onclick="deleteSelectedDeck()">選択したデッキ削除</button>
+      <button onclick="sortDeckByCost()">コスト順に並び替え</button>
+      <button onclick="sortDeckByName()">名前順に並び替え</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
